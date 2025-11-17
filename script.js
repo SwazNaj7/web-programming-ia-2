@@ -2,13 +2,18 @@
     Najay Green 2402084 Javascript
  */
 
+// Load cart from localStorage or initialize as empty array
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Update cart count on page load
     updateCartCount();
+    // Initialize navigation menu
     initNavigation();
 
+    // Determine which page is currently loaded
     const pageKey = document.body.getAttribute('data-page') || getCurrentPage();
+    // Map page names to their initialization functions
     const pageMap = {
         home: initHomePage,
         'index.html': initHomePage,
@@ -24,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'checkout.html': initCheckoutPage
     };
 
+    // Run the appropriate initialization function for this page
     const initializer = pageMap[pageKey];
     if (typeof initializer === 'function') {
         initializer();
@@ -31,30 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getCurrentPage() {
+    // Get the current URL path
     const path = window.location.pathname;
+    // Extract the filename from the path
     const page = path.split('/').pop();
     return page || 'index.html';
 }
 
 function updateCartCount() {
+    // Calculate total number of items in cart
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    // Update all cart count displays on the page
     document.querySelectorAll('#cartCount, .cart-indicator').forEach((node) => {
         node.textContent = totalItems;
     });
 }
 
 function saveCart() {
+    // Save cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+    // Update cart count display
     updateCartCount();
 }
 
 function initNavigation() {
+    // Find all navigation toggle buttons
     const navButtons = document.querySelectorAll('.nav-toggle, #menuToggle');
     navButtons.forEach((button) => {
+        // Get the menu that this button controls
         const menuId = button.getAttribute('aria-controls') || 'navMenu';
         const menu = document.getElementById(menuId);
         if (!menu) return;
 
+        // Toggle menu visibility when button is clicked
         button.addEventListener('click', () => {
             const expanded = button.getAttribute('aria-expanded') === 'true';
             button.setAttribute('aria-expanded', String(!expanded));
@@ -66,9 +81,12 @@ function initNavigation() {
 /* ---------- Home ---------- */
 
 function initHomePage() {
+    // Find all call-to-action buttons in hero section
     const heroCtas = document.querySelectorAll('.hero-actions .btn');
     heroCtas.forEach((cta) => {
+        // Add focus styling when button receives focus
         cta.addEventListener('focus', () => cta.classList.add('is-focused'));
+        // Remove focus styling when button loses focus
         cta.addEventListener('blur', () => cta.classList.remove('is-focused'));
     });
 }
@@ -80,34 +98,43 @@ function initLoginPage() {
     if (!loginForm) return;
 
     loginForm.addEventListener('submit', (e) => {
+        // Prevent default form submission
         e.preventDefault();
 
+        // Get input values
         const identifierInput = document.getElementById('loginIdentifier');
         const passwordInput = document.getElementById('loginPassword');
         const identifier = identifierInput ? identifierInput.value.trim() : '';
         const password = passwordInput ? passwordInput.value.trim() : '';
+        // Clear previous error messages
         clearErrorMessages(['loginIdentifierError', 'loginPasswordError']);
 
         let hasError = false;
 
+        // Validate username/email field
         if (!identifier) {
             showError('loginIdentifierError', 'Enter your username or email.');
             hasError = true;
         }
 
+        // Validate password field
         if (!password) {
             showError('loginPasswordError', 'Password is required.');
             hasError = true;
         }
 
+        // Stop if validation errors exist
         if (hasError) {
             showMessage('loginFeedback', 'Fill out the required fields.', 'error');
             return;
         }
 
+        // Save user session to localStorage
         localStorage.setItem('sessionUser', JSON.stringify({ identifier }));
+        // Show success message
         showMessage('loginFeedback', 'Welcome back! Redirecting to products...', 'success');
 
+        // Redirect to products page after delay
         setTimeout(() => {
             window.location.href = 'products.html';
         }, 1500);
@@ -121,8 +148,10 @@ function initRegisterPage() {
     if (!registerForm) return;
     
     registerForm.addEventListener('submit', (event) => {
+        // Prevent default form submission
         event.preventDefault();
 
+        // Define all required fields with their error elements
         const requiredFields = [
             { id: 'firstName', error: 'firstNameError', message: 'First name is required.' },
             { id: 'lastName', error: 'lastNameError', message: 'Last name is required.' },
@@ -133,49 +162,59 @@ function initRegisterPage() {
             { id: 'confirmPassword', error: 'confirmPasswordError', message: 'Confirm your password.' }
         ];
 
+        // Clear all previous error messages
         clearErrorMessages(requiredFields.map((field) => field.error));
         clearErrorMessages(['phoneError', 'dobError', 'campusError']);
 
-        let issues = 0;
+        // Validate all required fields
+        let hasError = false;
         requiredFields.forEach((field) => {
             const input = document.getElementById(field.id);
             if (!input || !input.value.trim()) {
                 showError(field.error, field.message);
-                issues++;
+                hasError = true;
             }
         });
 
+        // Validate password confirmation matches
         const passwordInput = document.getElementById('registerPassword');
         const confirmInput = document.getElementById('confirmPassword');
         if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
             showError('confirmPasswordError', 'Passwords must match.');
-            issues++;
+            hasError = true;
         }
 
+        // Validate terms checkbox is checked
         const termsAccepted = document.getElementById('terms');
         if (termsAccepted && !termsAccepted.checked) {
             alert('Please accept the terms to continue.');
-            issues++;
+            hasError = true;
         }
 
-        if (issues > 0) {
+        // Stop if validation errors exist
+        if (hasError) {
             showMessage('registerFeedback', 'Please complete the highlighted fields.', 'error');
             return;
         }
 
+        // Collect all required field values into profile object
         const profile = requiredFields.reduce((data, field) => {
             const input = document.getElementById(field.id);
             data[field.id] = input ? input.value.trim() : '';
             return data;
         }, {});
 
+        // Add optional fields to profile
         profile.phoneNumber = document.getElementById('phoneNumber')?.value.trim() || '';
         profile.dateOfBirth = document.getElementById('dateOfBirth')?.value || '';
         profile.campus = document.getElementById('campus')?.value || '';
 
+        // Save profile to localStorage
         localStorage.setItem('campusThriveProfile', JSON.stringify(profile));
+        // Show success message
         showMessage('registerFeedback', 'Registration saved! Redirecting to login...', 'success');
 
+        // Redirect to login page after delay
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 1500);
@@ -185,21 +224,28 @@ function initRegisterPage() {
 /* ---------- Products + Filters ---------- */
 
 function initProductsPage() {
+    // Set up add to cart button functionality
     bindAddToCartButtons();
 }
 
 function bindAddToCartButtons() {
+    // Find all add to cart buttons
     document.querySelectorAll('.add-to-cart').forEach((button) => {
         button.addEventListener('click', () => {
+            // Get product details from button attributes
             const productName = button.getAttribute('data-name');
             const productPrice = parseFloat(button.getAttribute('data-price'));
 
+            // Validate product data
             if (!productName || Number.isNaN(productPrice)) return;
 
+            // Add product to cart
             addToCart(productName, productPrice);
+            // Show feedback on button
             button.textContent = 'Added to cart';
             button.disabled = true;
 
+            // Reset button after delay
             setTimeout(() => {
                 button.textContent = 'Add to cart';
                 button.disabled = false;
@@ -209,23 +255,30 @@ function bindAddToCartButtons() {
 }
 
 function addToCart(name, price) {
+    // Check if product already exists in cart
     const existingItem = cart.find((item) => item.name === name);
     if (existingItem) {
+        // Increase quantity if product exists
         existingItem.quantity += 1;
     } else {
+        // Add new product to cart
         cart.push({ name, price, quantity: 1 });
     }
+    // Save cart to localStorage
     saveCart();
 }
 
 /* ---------- Cart Logic ---------- */
 
 function initCartPage() {
+    // Display cart items
     displayCart();
 
+    // Set up clear cart button
     const clearCartBtn = document.getElementById('clearCartBtn');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', () => {
+            // Confirm before clearing cart
             if (confirm('Clear all items from your cart?')) {
                 cart = [];
                 saveCart();
@@ -236,11 +289,13 @@ function initCartPage() {
 }
 
 function displayCart() {
+    // Get cart display elements
     const cartItemsContainer = document.getElementById('cartItems');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
     const cartContainer = document.getElementById('cartContainer');
     if (!cartItemsContainer || !emptyCartMessage || !cartContainer) return;
 
+    // Show empty cart message if no items
     if (cart.length === 0) {
         emptyCartMessage.classList.remove('hidden');
         cartContainer.classList.add('hidden');
@@ -248,10 +303,12 @@ function displayCart() {
         return;
     }
 
+    // Show cart table if items exist
     emptyCartMessage.classList.add('hidden');
     cartContainer.classList.remove('hidden');
     cartItemsContainer.innerHTML = '';
 
+    // Create a table row for each cart item
     cart.forEach((item, index) => {
         const subtotal = item.price * item.quantity;
         const row = document.createElement('tr');
@@ -267,10 +324,12 @@ function displayCart() {
         cartItemsContainer.appendChild(row);
     });
 
+    // Add event listeners to quantity inputs
     document.querySelectorAll('.quantity-input').forEach((input) => {
         input.addEventListener('change', () => {
             const index = Number(input.getAttribute('data-index'));
             const newQuantity = Number(input.value);
+            // Update quantity if valid
             if (Number.isInteger(newQuantity) && newQuantity > 0) {
                 cart[index].quantity = newQuantity;
                 saveCart();
@@ -279,30 +338,36 @@ function displayCart() {
         });
     });
 
+    // Add event listeners to remove buttons
     document.querySelectorAll('.remove-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
             const index = Number(btn.getAttribute('data-index'));
+            // Remove item from cart
             cart.splice(index, 1);
             saveCart();
             displayCart();
         });
     });
 
+    // Update cart totals
     calculateCartTotals();
 }
 
 function calculateCartTotals() {
+    // Get total display elements
     const subtotalEl = document.getElementById('cartSubtotal');
     const discountEl = document.getElementById('cartDiscount');
     const taxEl = document.getElementById('cartTax');
     const totalEl = document.getElementById('cartTotal');
     if (!subtotalEl || !discountEl || !taxEl || !totalEl) return;
 
+    // Calculate cart totals
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const discount = 0;
     const tax = subtotal * 0.15;
     const total = subtotal + tax;
 
+    // Update display elements with calculated values
     subtotalEl.textContent = subtotal.toFixed(2);
     discountEl.textContent = discount.toFixed(2);
     taxEl.textContent = tax.toFixed(2);
@@ -312,11 +377,13 @@ function calculateCartTotals() {
 /* ---------- Checkout ---------- */
 
 function initCheckoutPage() {
+    // Display order summary
     displayCheckoutSummary();
 
     const checkoutForm = document.getElementById('checkoutForm');
     const cancelBtn = document.getElementById('cancelBtn');
 
+    // Set up cancel button to return to cart
     if (cancelBtn) {
         cancelBtn.addEventListener('click', () => {
             window.location.href = 'cart.html';
@@ -326,8 +393,10 @@ function initCheckoutPage() {
     if (!checkoutForm) return;
 
     checkoutForm.addEventListener('submit', (event) => {
+        // Prevent default form submission
         event.preventDefault();
 
+        // Define all required checkout fields
         const requiredFields = [
             { id: 'fullName', error: 'fullNameError', message: 'Full name is required.' },
             { id: 'email', error: 'emailCheckoutError', message: 'Email is required.' },
@@ -337,8 +406,10 @@ function initCheckoutPage() {
             { id: 'parish', error: 'parishError', message: 'Select a parish.' }
         ];
 
+        // Clear previous error messages
         clearErrorMessages(requiredFields.map((field) => field.error));
 
+        // Validate all required fields
         let hasError = false;
         requiredFields.forEach((field) => {
             const input = document.getElementById(field.id);
@@ -348,11 +419,13 @@ function initCheckoutPage() {
             }
         });
 
+        // Stop if validation errors exist
         if (hasError) {
             showMessage('orderConfirmation', 'Please finish the required fields before submitting.', 'error');
             return;
         }
 
+        // Create order data object with all information
         const summaryTotal = document.getElementById('checkoutTotal');
         const orderData = {
             fields: requiredFields.reduce((acc, field) => {
@@ -365,13 +438,18 @@ function initCheckoutPage() {
             date: new Date().toISOString()
         };
 
+        // Save order to localStorage
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
+        // Clear cart
         cart = [];
         saveCart();
 
+        // Show confirmation message
         showMessage('orderConfirmation', 'Order confirmed! Details saved locally.', 'success');
+        // Clear form fields
         checkoutForm.reset();
 
+        // Redirect to home page after delay
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 2000);
@@ -379,15 +457,18 @@ function initCheckoutPage() {
 }
 
 function displayCheckoutSummary() {
+    // Get checkout summary container
     const checkoutItemsContainer = document.getElementById('checkoutItems');
     if (!checkoutItemsContainer) return;
 
+    // Show empty message if no items in cart
     if (cart.length === 0) {
         checkoutItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
         calculateCheckoutTotals();
         return;
     }
 
+    // Clear container and display each cart item
     checkoutItemsContainer.innerHTML = '';
     cart.forEach((item) => {
         const wrapper = document.createElement('div');
@@ -402,26 +483,31 @@ function displayCheckoutSummary() {
         checkoutItemsContainer.appendChild(wrapper);
     });
 
+    // Calculate and display totals
     calculateCheckoutTotals();
 }
 
 function calculateCheckoutTotals() {
+    // Get checkout total display elements
     const subtotalEl = document.getElementById('checkoutSubtotal');
     const discountEl = document.getElementById('checkoutDiscount');
     const taxEl = document.getElementById('checkoutTax');
     const totalEl = document.getElementById('checkoutTotal');
     if (!subtotalEl || !discountEl || !taxEl || !totalEl) return;
 
+    // Calculate checkout totals
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const discount = 0;
     const tax = subtotal * 0.15;
     const total = subtotal + tax;
 
+    // Update total display elements
     subtotalEl.textContent = subtotal.toFixed(2);
     discountEl.textContent = discount.toFixed(2);
     taxEl.textContent = tax.toFixed(2);
     totalEl.textContent = total.toFixed(2);
 
+    // Set payment input to total amount
     const payInput = document.getElementById('amountPaying');
     if (payInput) {
         payInput.value = total.toFixed(2);
@@ -429,7 +515,9 @@ function calculateCheckoutTotals() {
 }
 
 /* ---------- Generic Messaging Helpers ---------- */
+
 function showError(elementId, message) {
+    // Display error message in specified element
     const errorElement = document.getElementById(elementId);
     if (errorElement) {
         errorElement.textContent = message;
@@ -437,6 +525,7 @@ function showError(elementId, message) {
 }
 
 function clearErrorMessages(elementIds) {
+    // Clear error messages from specified elements
     elementIds.forEach((id) => {
         const node = document.getElementById(id);
         if (node) node.textContent = '';
@@ -444,6 +533,7 @@ function clearErrorMessages(elementIds) {
 }
 
 function showMessage(elementId, message, type) {
+    // Display feedback message with specified type (success or error)
     const messageElement = document.getElementById(elementId);
     if (!messageElement) return;
     messageElement.textContent = message;
