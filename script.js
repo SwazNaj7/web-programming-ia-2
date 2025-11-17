@@ -1,6 +1,5 @@
 /*
-     Campus Thrive Supply Co. - Basic Implementation
-     Student: Najay Green 2402084
+    Najay Green 2402084 Javascript
  */
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
