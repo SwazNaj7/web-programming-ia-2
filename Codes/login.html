@@ -1,0 +1,79 @@
+<!--Najay Green 2402084 IA#2-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login | Campus Thrive Supply Co.</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body data-page="login">
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand-mark">
+                <span class="brand-title">Campus Thrive Supply Co.</span>
+                <span class="brand-subtitle">Study-ready essentials for students</span>
+            </div>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+                <ul class="nav-links" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="active">Login</a></li>
+                    <li class="nav-cart"><a href="cart.html">Cart <span id="cartCount" class="cart-indicator">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-panel">
+            <div class="container auth-grid">
+                <div class="auth-copy">
+                    <p class="eyebrow">Returning customers</p>
+                    <h1>Access saved carts and subscription pricing</h1>
+                    <p>Once you sign in, your most recent cart, verified student discount, and delivery addresses will be ready at checkout.</p>
+                    <ul class="auth-benefits">
+                        <li>Track order history per semester</li>
+                        <li>Download invoices for reimbursement</li>
+                        <li>Store multiple campus delivery addresses</li>
+                    </ul>
+                </div>
+                <div class="auth-card">
+                    <h2>Login</h2>
+                    <p class="auth-subtitle">Use your Campus Thrive credentials</p>
+                    <form id="loginForm" novalidate>
+                        <div class="form-field">
+                            <label for="loginIdentifier">Email or Username</label>
+                            <input type="text" id="loginIdentifier" name="identifier" autocomplete="username" placeholder="student@utech.edu.jm" required>
+                            <span class="form-error" id="loginIdentifierError"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="password" autocomplete="current-password" placeholder="Enter password" required>
+                            <span class="form-error" id="loginPasswordError"></span>
+                        </div>
+                        <div class="form-field check-field">
+                            <input type="checkbox" id="rememberDevice" name="rememberDevice">
+                            <label for="rememberDevice">Stay signed in on this device</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <p class="form-note">New to Campus Thrive? <a href="register.html">Create an account</a></p>
+                    </form>
+                    <div id="loginFeedback" class="message-box hidden" role="status" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-note">&copy; 2025 Campus Thrive Supply Co.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+</body>
+</html>

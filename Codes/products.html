@@ -1,0 +1,253 @@
+<!--Najay Green 2402084 IA#2-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog | Campus Thrive Supply Co.</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body data-page="products">
+    <!-- Nav Section -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand-mark">
+                <span class="brand-title">Campus Thrive Supply Co.</span>
+            </div>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <button class="nav-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+                <ul class="nav-links" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li class="nav-cart"><a href="cart.html">Cart <span id="cartCount" class="cart-indicator">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="catalog-hero">
+            <div class="container catalog-grid">
+                <div>
+                    <p class="eyebrow">Updated weekly</p>
+                    <h1>Curated supplies built for labs, lectures, and long nights</h1>
+                    <p>Every item is vetted by student ambassadors for durability, clear documentation, and fast delivery across campus halls.</p>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="label">Ready to ship</span>
+                            <strong>32 items</strong>
+                        </li>
+                        <li>
+                            <span class="label">Bundle savings</span>
+                            <strong>Up to 22%</strong>
+                        </li>
+                        <li>
+                            <span class="label">Local pickup</span>
+                            <strong>Kingston &amp; Montego Bay</strong>
+                        </li>
+                    </ul>
+                </div>
+                <aside class="catalog-note">
+                    <h2>Need help choosing?</h2>
+                    <p>Browse the full lineup below and use the product tags to match your labs, studios, or commute needs. Our support team replies within one business day.</p>
+                    <a class="link-arrow" href="about.html">Meet the support team</a>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Product Gallery -->
+        <section class="product-gallery">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">All collections</p>
+                    <h2>Pick the kit that keeps you organized</h2>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <article class="product-card" data-id="planner-pack">
+                        <div class="product-thumb">
+                            <img src="../Assets/stickynotes.jpg"></img>
+                        </div>
+                        <div class="product-content">
+                            <h3>Planner Pack</h3>
+                            <p>Weekly planner, sticky note trio, and bold pen set for tight assignment schedules.</p>
+                            <ul class="tag-list">
+                                <li>Ships in 48h</li>
+                                <li>Paper sourced locally</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$32.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Planner Pack" data-price="32.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="study-kit">
+                        <div class="product-thumb">
+                            <img src="../Assets/stickynotes.jpg" alt="Study Launch Kit">
+                        </div>
+                        <div class="product-content">
+                            <h3>Study Launch Kit</h3>
+                            <p>Notebook trio, cable organizer, and habit tracker so your first week stays focused.</p>
+                            <ul class="tag-list">
+                                <li>Best seller</li>
+                                <li>Bundle savings 18%</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$64.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Study Launch Kit" data-price="64.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="desk-lamp">
+                        <div class="product-thumb">
+                            <img src="../Assets/desklamp.jpg" alt="Adjustable Desk Lamp">
+                        </div>
+                        <div class="product-content">
+                            <h3>Adjustable Desk Lamp</h3>
+                            <p>Three color temperatures and USB-C passthrough power for small dorm desks.</p>
+                            <ul class="tag-list">
+                                <li>Low energy</li>
+                                <li>2-year warranty</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$35.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Adjustable Desk Lamp" data-price="35.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="commuter-pack">
+                        <div class="product-thumb">
+                            <img src="../Assets/headphones.jpg" alt="Commuter Pack">
+                        </div>
+                        <div class="product-content">
+                            <h3>Commuter Pack</h3>
+                            <p>Weather-ready backpack, cable pouch, and fold-flat headphones for travel days.</p>
+                            <ul class="tag-list">
+                                <li>Limited run</li>
+                                <li>Water resistant</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$89.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Commuter Pack" data-price="89.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="steel-bottle">
+                        <div class="product-thumb">
+                            <img src="../Assets/waterbottle.jpeg" alt="Insulated Steel Bottle">
+                        </div>
+                        <div class="product-content">
+                            <h3>Insulated Steel Bottle</h3>
+                            <p>Keeps drinks cold for 18 hours and fits every Campus Thrive backpack sleeve.</p>
+                            <ul class="tag-list">
+                                <li>BPA free</li>
+                                <li>Dishwasher safe</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$24.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Insulated Steel Bottle" data-price="24.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="wireless-mouse">
+                        <div class="product-thumb">
+                            <img src="../Assets/wirelessmouse.jpg" alt="Wireless Study Mouse">
+                        </div>
+                        <div class="product-content">
+                            <h3>Wireless Study Mouse</h3>
+                            <p>Silent clicks, rechargeable battery, and ergonomic grip for four-hour lectures.</p>
+                            <ul class="tag-list">
+                                <li>USB-C cable</li>
+                                <li>One-year support</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$29.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Wireless Study Mouse" data-price="29.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="wellness-bundle">
+                        <div class="product-thumb">
+                            <img src="../Assets/bands.jpg" alt="Wellness Break Bundle">
+                        </div>
+                        <div class="product-content">
+                            <h3>Wellness Break Bundle</h3>
+                            <p>Aromatherapy roll-on, screen wipes, and stretching band to reset between labs.</p>
+                            <ul class="tag-list">
+                                <li>Self-care pick</li>
+                                <li>Ships next day</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$27.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Wellness Break Bundle" data-price="27.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-id="tech-refresh">
+                        <div class="product-thumb">
+                            <img src="../Assets/usb_drive.jpg" alt="Tech Refresh Kit">
+                        </div>
+                        <div class="product-content">
+                            <h3>Tech Refresh Kit</h3>
+                            <p>32GB flash drive, braided USB-C cable, and microfiber wrap for shared lab work.</p>
+                            <ul class="tag-list">
+                                <li>Lab approved</li>
+                                <li>2-year support</li>
+                            </ul>
+                            <div class="price-row">
+                                <p class="price-tag">$41.00</p>
+                                <button class="btn btn-primary add-to-cart" data-name="Tech Refresh Kit" data-price="41.00">Add to cart</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bundle-spotlight">
+            <div class="container bundle-grid">
+                <div>
+                    <h2>Semester Set Builder</h2>
+                    <p>Combine any hydration item, one desk accessory, and a mobility upgrade to unlock free courier delivery. Perfect for students balancing commutes with late studio hours.</p>
+                    <ul class="checklist">
+                        <li>Automatic tracking updates to student email</li>
+                        <li>Optional extended care plan (+$6)</li>
+                        <li>Personalized packing slip for gifting</li>
+                    </ul>
+                </div>
+                <div class="bundle-card">
+                    <p class="eyebrow">Featured combo</p>
+                    <h3>Focus + Mobility</h3>
+                    <p>Desk lamp • Steel bottle • Commuter pack</p>
+                    <div class="price-row">
+                        <div>
+                            <span class="label">Bundle price</span>
+                            <p class="price-tag">$128.00</p>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-name="Focus + Mobility Bundle" data-price="128.00">Add bundle</button>
+                    </div>
+                    <p class="tiny-text">Add bundle to cart to see savings reflected automatically.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-note">&copy; 2025 Campus Thrive Supply Co.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+</body>
+</html>

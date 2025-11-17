@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Campus Thrive Supply Co.</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body data-page="cart">
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand-mark">
+                <span class="brand-title">Campus Thrive Supply Co.</span>
+            </div>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+                <ul class="nav-links" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li class="nav-cart"><a href="cart.html" class="active">Cart <span id="cartCount" class="cart-indicator">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <div class="container">
+                <h2>Your cart</h2>
+                
+                <div id="emptyCartMessage" class="empty-cart hidden">
+                    <p>Your cart is currently empty.</p>
+                    <a href="products.html" class="btn btn-primary">Browse products</a>
+                </div>
+
+                <div id="cartContainer" class="cart-container hidden">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartItems">
+                        </tbody>
+                    </table>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span>$<span id="cartSubtotal">0.00</span></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Student Discount (10%):</span>
+                            <span class="discount">-$<span id="cartDiscount">0.00</span></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (15%):</span>
+                            <span>$<span id="cartTax">0.00</span></span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total:</span>
+                            <span>$<span id="cartTotal">0.00</span></span>
+                        </div>
+                    </div>
+
+                    <div class="cart-actions">
+                        <button id="clearCartBtn" class="btn btn-secondary">Clear cart</button>
+                        <a href="products.html" class="btn btn-outline">Continue shopping</a>
+                        <a href="checkout.html" class="btn btn-primary">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-note">&copy; 2025 Campus Thrive Supply Co.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+</body>
+</html>

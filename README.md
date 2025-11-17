@@ -1,2 +1,4 @@
-# web-programming-ia-2
-CIT2011 Web Programming IA#2
+# Smart Budget Store - E-Commerce Website
+
+A responsive e-commerce website for college students to purchase essential items at budget-friendly prices.
+

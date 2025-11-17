@@ -1,0 +1,131 @@
+<!--Najay Green 2402084 IA#2 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Campus Thrive Supply Co.</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body data-page="register">
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand-mark">
+                <span class="brand-title">Campus Thrive Supply Co.</span>
+            </div>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+                <ul class="nav-links" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li class="nav-cart"><a href="cart.html">Cart <span id="cartCount" class="cart-indicator">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Register Section -->
+    <main class="auth-page">
+        <section class="auth-panel">
+            <div class="container auth-grid">
+                <div class="auth-copy">
+                    <p class="eyebrow">New customers</p>
+                    <h1>Register once, reuse your curated supply lists every semester</h1>
+                    <p>Verification unlocks academic pricing, bundled offers, and campus delivery preferences.</p>
+                    <ol class="auth-steps">
+                        <li>Share your UTech Student ID for verification.</li>
+                        <li>Save delivery points for labs, dorms, or studios.</li>
+                        <li>Reorder curated kits with one click before exams.</li>
+                    </ol>
+                </div>
+                <div class="auth-card">
+                    <h2>Student registration</h2>
+                    <form id="registerForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Avery" required>
+                                <span class="form-error" id="firstNameError"></span>
+                            </div>
+                            <div class="form-field">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Campbell" required>
+                                <span class="form-error" id="lastNameError"></span>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="studentId">Student ID</label>
+                            <input type="text" id="studentId" name="studentId" placeholder="20231234" required>
+                            <span class="form-error" id="studentIdError"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="registerEmail">UTech Email</label>
+                                <input type="email" id="registerEmail" name="email" placeholder="20231234@utech.edu.jm" required>
+                                <span class="form-error" id="emailError"></span>
+                            </div>
+                            <div class="form-field">
+                                <label for="phoneNumber">Mobile Number</label>
+                                <input type="tel" id="phoneNumber" name="phone" placeholder="876-555-0191" required>
+                                <span class="form-error" id="phoneError"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="dateOfBirth">Date of Birth</label>
+                                <input type="date" id="dateOfBirth" name="dob" required>
+                                <span class="form-error" id="dobError"></span>
+                            </div>
+                            <div class="form-field">
+                                <label for="campus">Primary Campus</label>
+                                <select id="campus" name="campus" required>
+                                    <option value="">Select campus</option>
+                                    <option value="Papine">Papine</option>
+                                    <option value="Western">Western</option>
+                                    <option value="Kingston">Kingston</option>
+                                </select>
+                                <span class="form-error" id="campusError"></span>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="registerUsername">Preferred Username</label>
+                            <input type="text" id="registerUsername" name="username" placeholder="campus-thrive" required>
+                            <span class="form-error" id="usernameError"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="registerPassword">Password</label>
+                                <input type="password" id="registerPassword" name="password" placeholder="Create password" required>
+                                <span class="form-error" id="passwordError"></span>
+                            </div>
+                            <div class="form-field">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required>
+                                <span class="form-error" id="confirmPasswordError"></span>
+                            </div>
+                        </div>
+                        <div class="form-field check-field">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the Campus Thrive service terms.</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Create account</button>
+                        <p class="form-note">Have an account? <a href="login.html">Login</a></p>
+                    </form>
+                    <div id="registerFeedback" class="message-box hidden" role="status" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-note">&copy; 2025 Campus Thrive Supply Co.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
