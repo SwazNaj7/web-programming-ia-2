@@ -97,6 +97,54 @@ function initLoginPage() {
     const loginForm = document.getElementById('loginForm');
     if (!loginForm) return;
 
+    // Check if user is already logged in
+    const sessionUser = localStorage.getItem('sessionUser');
+    
+    if (sessionUser) {
+        // User is already logged in
+        const userData = JSON.parse(sessionUser);
+        const storedProfile = localStorage.getItem('campusThriveProfile');
+        
+        if (storedProfile) {
+            const userProfile = JSON.parse(storedProfile);
+            
+            // Hide the login form
+            loginForm.classList.add('hidden');
+            
+            // Show welcome message
+            const loginFeedback = document.getElementById('loginFeedback');
+            if (loginFeedback) {
+                loginFeedback.textContent = `Welcome back, ${userProfile.firstName} ${userProfile.lastName}! You are already logged in.`;
+                loginFeedback.className = 'message-box success';
+                loginFeedback.classList.remove('hidden');
+            }
+            
+            // Displays the user logged in
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'auth-card';
+            welcomeMessage.innerHTML = `
+                <h2>Welcome Back!</h2>
+                <p>Hello ${userProfile.firstName}, you're already logged in.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="products.html">Go to Products</a>
+                    <button class="btn btn-outline" id="logoutBtn">Logout</button>
+                </div>
+            `;
+            loginForm.parentNode.insertBefore(welcomeMessage, loginForm);
+            
+            // Add logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('sessionUser');
+                    window.location.reload();
+                });
+            }
+            
+            return;
+        }
+    }
+
     loginForm.addEventListener('submit', (e) => {
         // Prevent default form submission
         e.preventDefault();
@@ -129,10 +177,39 @@ function initLoginPage() {
             return;
         }
 
-        // Save user session to localStorage
-        localStorage.setItem('sessionUser', JSON.stringify({ identifier }));
+        // Check if user exists in localStorage
+        const storedProfile = localStorage.getItem('campusThriveProfile');
+        
+        if (!storedProfile) {
+            // No registered user found
+            showError('loginIdentifierError', 'No account found. Please register first.');
+            showMessage('loginFeedback', 'Invalid credentials. Please register if you don\'t have an account.', 'error');
+            return;
+        }
+
+        // Parse the stored user data
+        const userProfile = JSON.parse(storedProfile);
+        
+        // Check if credentials match (username or email)
+        const identifierMatch = identifier === userProfile.registerUsername || identifier === userProfile.registerEmail;
+        const passwordMatch = password === userProfile.registerPassword;
+
+        if (!identifierMatch || !passwordMatch) {
+            // Invalid credentials
+            showError('loginIdentifierError', 'Invalid username/email or password.');
+            showError('loginPasswordError', 'Invalid username/email or password.');
+            showMessage('loginFeedback', 'Login failed. Please check your credentials.', 'error');
+            return;
+        }
+
+        // Successful login - Save user session to localStorage
+        localStorage.setItem('sessionUser', JSON.stringify({ 
+            identifier,
+            firstName: userProfile.firstName,
+            lastName: userProfile.lastName 
+        }));
         // Show success message
-        showMessage('loginFeedback', 'Welcome back! Redirecting to products...', 'success');
+        showMessage('loginFeedback', `Welcome back, ${userProfile.firstName}! Redirecting to products...`, 'success');
 
         // Redirect to products page after delay
         setTimeout(() => {
