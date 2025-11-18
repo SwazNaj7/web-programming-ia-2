@@ -830,11 +830,3 @@ textarea {
     .filter-grid { grid-template-columns: 1fr; }
     .checkout-grid { grid-template-columns: 1fr; }
 }
-
-
-@media print {
-    .site-header,
-    .primary-nav,
-    .btn,
-    .site-footer { display: none; }
-}
