@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 :root {
-    /* New Green Palette */
-    --pale-mint: rgb(236, 244, 232);      /* Lightest - backgrounds */
-    --soft-green: rgb(203, 243, 187);     /* Light - accents */
-    --mint-green: rgb(171, 231, 178);     /* Medium - CTAs */
-    --teal-green: rgb(147, 191, 199);     /* Dark - headers/buttons */
+    --pale-mint: rgb(236, 244, 232); 
+    --soft-green: rgb(203, 243, 187); 
+    --mint-green: rgb(171, 231, 178);
+    --teal-green: rgb(147, 191, 199);
     
     --ink: #111827;
     --slate: #4a4a6a;
