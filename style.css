@@ -6,7 +6,6 @@
     --mint-green: rgb(171, 231, 178);     /* Medium - CTAs */
     --teal-green: rgb(147, 191, 199);     /* Dark - headers/buttons */
     
-    /* Legacy aliases for compatibility */
     --ink: #111827;
     --slate: #4a4a6a;
     --mist: rgb(236, 244, 232);
@@ -125,13 +124,13 @@ a:hover {
     width: 100%;
 }
 
-.hidden { display: none !important; }
+.hidden { display: none; }
 .tiny-text { font-size: 0.8rem; color: var(--slate); }
 
 /* Navbar styling */
 
 .site-header,
-.navbar { /* support legacy pages */
+.navbar {
     background: var(--bg-white);
     position: sticky;
     top: 0;
@@ -838,5 +837,5 @@ textarea {
     .site-header,
     .primary-nav,
     .btn,
-    .site-footer { display: none !important; }
+    .site-footer { display: none; }
 }
