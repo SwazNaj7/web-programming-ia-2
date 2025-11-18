@@ -23,13 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Home page: hero button focus styling
-    const heroCtas = document.querySelectorAll('.hero-actions .btn');
-    heroCtas.forEach((cta) => {
-        cta.addEventListener('focus', () => cta.classList.add('is-focused'));
-        cta.addEventListener('blur', () => cta.classList.remove('is-focused'));
-    });
-
     // Login page
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -60,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="btn btn-outline" id="logoutBtn">Logout</button>
                     </div>
                 `;
+                // inserts the login info into the login form to show user logged in
                 loginForm.parentNode.insertBefore(welcomeMessage, loginForm);
                 
                 const logoutBtn = document.getElementById('logoutBtn');
@@ -479,7 +473,7 @@ function calculateCheckoutTotals() {
     }
 }
 
-/* ---------- Generic Messaging Helpers ---------- */
+// helper functions
 
 function showError(elementId, message) {
     // Display error message in specified element
