@@ -218,14 +218,19 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCart();
 
         const clearCartBtn = document.getElementById('clearCartBtn');
+        //check for cart button
+        //add event listener
+        //give the user an alert
+        //set the cart to default, save then display
         if (clearCartBtn) {
-            clearCartBtn.addEventListener('click', () => {
-                if (confirm('Clear all items from your cart?')) {
-                    cart = [];
-                    saveCart();
-                    displayCart();
+            clearCartBtn.addEventListener("click", () => {
+                if(confirm("Are you sure you want to clear your cart"))
+                {
+                    cart = []
+                    saveCart()
+                    displayCart()
                 }
-            });
+            })
         }
     }
 
@@ -313,6 +318,7 @@ function saveCart() {
 
 function addToCart(name, price) {
     // Check if product already exists in cart
+    console.log("Adding to cart: ", {name, price})
     const existingItem = cart.find((item) => item.name === name);
     if (existingItem) {
         // Increase quantity if product exists
